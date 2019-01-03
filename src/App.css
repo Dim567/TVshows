@@ -1,32 +1,36 @@
-.App {
+table{
+  width: 90vw;
+  height: 50vh;
+  margin: auto;
+  border-collapse: collapse;
+  /*border: 3px solid green;*/
+}
+table, th{
+  border: 3px solid green;
+}
+th, td{
   text-align: center;
+  color: green;
+  /*border: 1px solid black;*/
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+td{
+  border: 2px solid black;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.pagContainer{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 5vh;
+  flex-direction: row;
+  justify-content: space-around;
 }
-
-.App-link {
-  color: #61dafb;
+.Pagination{
+  /*display: flex;*/
+  width: 1.5vw;
+  height: 1.5vw;
+  color: red;
+  background-color: cyan;
+  border: 2px solid blue;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1{
+  color: darkblue;
+  text-align: center;
 }
