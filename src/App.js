@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Pagination } from './Pagination.js';
 import Table from './Table.js';
 import './App.css';
@@ -18,4 +17,4 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+export default App;
