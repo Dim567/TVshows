@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 function mapStateToProps(state, ownProps){
   return {showname: state.showname};
 }
-// function mapDispatchToProps(){
-
-// }
+ function mapDispatchToProps(){
+ return function(dispatch){
+ 	return{
+	 	getInfoFromStore: ()=>dispatch({type: "GET_INFO"}),
+	 	getUpdate: ()=>{setTimeout(()=>dispatch({type: "UPDATE", response: ['But','I','am','better']}),5000)}//////example of async action creator
+	}
+ }
+}
 
 function TableRow(props){
 	const newColumns=Array(7).fill(1);
@@ -35,12 +40,19 @@ function TableRow(props){
 	);
 }
 function TableBody(props){
-	return (<tbody>{Array(10).fill(1).map((el,ind)=><TableRow key={ind} ind={ind+1} showname={props.showname[ind]}/>)}</tbody>);
+	return (
+		<tbody>
+			{Array(10).fill(1).map((el,ind)=><TableRow key={ind} ind={ind+1} showname={props.showname[ind]}/>)}
+		</tbody>
+	);
 }
 class Table extends React.Component{
+	componentDidMount(){
+		this.props.getUpdate();		
+	}
 	render(){
 		return(
-			<table >
+			<table onClick={()=>this.props.getInfoFromStore()}>
 	          <thead>
 	            <tr>
 	              <th>Number</th>
@@ -57,4 +69,4 @@ class Table extends React.Component{
 		);
 	}
 }
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps,mapDispatchToProps)(Table);
