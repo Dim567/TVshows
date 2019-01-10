@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import remoteRequest from './remote_request.js';
+
+function mapStateToProps(state){
+	return {activePage: state.activePage}
+}
 
 class Pagination extends Component{
 	render() {
 		return (
 			<div className="pagContainer">
-				<div className="Pagination">1</div>
-				<div className="Pagination">2</div>
-				<div className="Pagination">3</div>
-				<div className="Pagination">4</div>
-				<div className="Pagination">5</div>
-				<div className="Pagination">6</div>
-				<div className="Pagination">7</div>
-				<div className="Pagination">8</div>
-				<div className="Pagination">9</div>
-				<div className="Pagination">10</div>
+				{Array(10).fill(1).map((el,ind)=>
+					<div className={this.props.activePage===(ind+1)?'activePagination':'Pagination'} key={'key'+ind} onClick={
+						()=>{this.props.dispatch(
+							(dispatch)=>remoteRequest(dispatch,ind+1)
+							);
+						}
+					}>
+						{ind+1}
+					</div>)}
 			</div>
 		);
 	}
 }
-export {Pagination};
+export default connect(mapStateToProps)(Pagination);

@@ -26,7 +26,7 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-   <!--  <script>
+  <!--   <script>
       var request = new XMLHttpRequest();
 
 request.open('GET', 'https://api.trakt.tv/shows/popular');
@@ -37,7 +37,7 @@ request.setRequestHeader('trakt-api-key', '094e531346ad44623adad1d303859ba4bd981
 
 request.onreadystatechange = function () {
   if (this.readyState === 4) {
-    console.log('Show name:', JSON.parse(this.responseText)[0]);
+    console.log('Show name:', JSON.parse(this.responseText));
   }
 };
 

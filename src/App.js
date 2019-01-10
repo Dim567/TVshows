@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Pagination } from './Pagination.js';
+import Pagination from './Pagination.js';
 import Table from './Table.js';
 import './App.css';
 
