@@ -1,4 +1,33 @@
 table
-  border: 5px solid green
+  margin: auto
+  width: 95vw
+  height: 50vh
+  border: 2px solid green
   border-collapse: collapse
   color: green
+  margin-bottom: 2vh
+  td, th
+    border: 1px solid green
+  th
+    &:hover
+      cursor: pointer
+    color: darkblue
+    background: grey
+h1
+  text-align: center
+  color: red
+  font-size: 10vh
+.pagContainer
+  display: flex
+  justify-content: space-around
+  .Pagination
+  .activePagination
+    cursor: pointer
+    width: 5vw
+    height: 5vw
+    color: black
+    font-size: 4vw
+    border: 2px solid green
+    background: cyan
+  .activePagination
+    background: red

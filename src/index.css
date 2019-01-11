@@ -1,7 +1,44 @@
 table {
-  border: 5px solid #008000;
+  margin: auto;
+  width: 95vw;
+  height: 50vh;
+  border: 2px solid #008000;
   border-collapse: collapse;
   color: #008000;
+  margin-bottom: 2vh;
+}
+table td,
+table th {
+  border: 1px solid #008000;
+}
+table th {
+  color: #00008b;
+  background: #808080;
+}
+table th:hover {
+  cursor: pointer;
+}
+h1 {
+  text-align: center;
+  color: #f00;
+  font-size: 10vh;
+}
+.pagContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.pagContainer .Pagination,
+.pagContainer .activePagination {
+  cursor: pointer;
+  width: 5vw;
+  height: 5vw;
+  color: #000;
+  font-size: 4vw;
+  border: 2px solid #008000;
+  background: #0ff;
+}
+.pagContainer .activePagination {
+  background: #f00;
 }
 body {
   margin: 0;

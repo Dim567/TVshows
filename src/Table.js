@@ -68,7 +68,7 @@ function TableRow(props){
 function TableBody(props){
 	return (
 		<tbody>
-			{Array(10).fill(1).map((el,ind)=><TableRow key={ind} ind={ind+1} showname={props.showname[ind]}/>)}
+			{Array(10).fill(1).map((el,ind)=><TableRow key={ind} ind={ind+1+(props.page-1)*10} showname={props.showname[ind]}/>)}
 		</tbody>
 	);
 }
@@ -93,7 +93,7 @@ class Table extends React.Component{
 	              <th>somth</th>
 	            </tr>
 	          </thead>
-	          <TableBody showname={this.props.showname} year={this.props.year}/>
+	          <TableBody showname={this.props.showname} page={this.props.activePage}/>
 	        </table>
 		);
 	}

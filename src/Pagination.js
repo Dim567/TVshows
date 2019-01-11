@@ -10,6 +10,7 @@ class Pagination extends Component{
 	render() {
 		return (
 			<div className="pagContainer">
+				<div className='Pagination' onClick={()=>alert('back')}>{'<<'}</div>
 				{Array(10).fill(1).map((el,ind)=>
 					<div className={this.props.activePage===(ind+1)?'activePagination':'Pagination'} key={'key'+ind} onClick={
 						()=>{this.props.dispatch(
@@ -18,7 +19,9 @@ class Pagination extends Component{
 						}
 					}>
 						{ind+1}
-					</div>)}
+					</div>
+				)}
+				<div className='Pagination' onClick={()=>alert('forward')}>{'>>'}</div>
 			</div>
 		);
 	}
