@@ -1,46 +1,5 @@
-table{
-  width: 90vw;
-  height: 50vh;
-  margin: auto;
+table {
+  border: 2px, solid, #008000;
   border-collapse: collapse;
-  /*border: 3px solid green;*/
-}
-table, th{
-  border: 3px solid green;
-}
-th, td{
-  text-align: center;
-  color: green;
-  /*border: 1px solid black;*/
-}
-td{
-  border: 2px solid black;
-}
-.pagContainer{
-  display: flex;
-  margin-top: 5vh;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.Pagination{
-  /*display: flex;*/
-  width: 1.5vw;
-  height: 1.5vw;
-  color: black;
-  background-color: cyan;
-  border: 2px solid blue;
-}
-.Pagination:hover{
-  cursor:pointer;
-}
-.activePagination{
-  width: 1.5vw;
-  height: 1.5vw;
-  color: black;
-  background-color: red;
-  border: 2px solid blue;
-}
-h1{
-  color: darkblue;
-  text-align: center;
+  color: #008000;
 }
