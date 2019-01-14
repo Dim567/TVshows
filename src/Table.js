@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import remoteRequest from './remote_request.js';
+import { sortCol } from './remote_request.js';
 
 // function remoteRequest(dispatch,startPage){
 // 	dispatch({type: 'BEGIN_REQUEST'});
@@ -31,7 +32,8 @@ function mapStateToProps(state, ownProps){
  return function(dispatch){
  	return{
 	 	getInfoFromStore: ()=>dispatch({type: "GET_INFO"}),
-	 	getStartPage: (pageNum)=>remoteRequest(dispatch,pageNum)//////example of async action creator
+	 	getStartPage: (pageNum)=>remoteRequest(dispatch,pageNum),
+	 	getSortedList: (colName)=>sortCol(dispatch,colName)//////example of async action creator
 	}
  }
 }
@@ -72,6 +74,21 @@ function TableBody(props){
 		</tbody>
 	);
 }
+function TableHead(props){
+	return (
+		<thead>
+	        <tr>
+	          <th>Number</th>
+	          <th>Poster</th>
+	          <th onClick={()=>props.sortList('showname')}>Show Name</th>
+	          <th onClick={()=>props.sortList('year')}>year</th>
+	          <th>somth</th>
+	          <th>somth</th>
+	          <th>somth</th>
+	        </tr>
+        </thead>
+	);
+}
 class Table extends React.Component{
 	componentDidMount(){
 		this.props.getStartPage(1);		
@@ -82,17 +99,7 @@ class Table extends React.Component{
 	render(){
 		return(
 			<table onClick={()=>{this.props.getInfoFromStore(); console.log(this.props.activePage);}}>
-	          <thead>
-	            <tr>
-	              <th>Number</th>
-	              <th>Poster</th>
-	              <th>Show Name</th>
-	              <th>somth</th>
-	              <th>somth</th>
-	              <th>somth</th>
-	              <th>somth</th>
-	            </tr>
-	          </thead>
+	          <TableHead sortList={this.props.getSortedList}/>
 	          <TableBody showname={this.props.showname} page={this.props.activePage}/>
 	        </table>
 		);

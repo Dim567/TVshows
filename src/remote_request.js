@@ -10,12 +10,23 @@ export default function remoteRequest(dispatch,startPage){
 		request.onreadystatechange = function () {
 		  if (this.readyState === 4) {
 		  	if(this.status!==200)
-		  		dispatch({type: 'ERROR'});
-		    //console.log('Show name:', JSON.parse(this.responseText));
-		   const response=JSON.parse(this.responseText).map((el)=>{return {title: el.title, year: el.year};});
-		   // console.log(response);
+		  	    dispatch({type: 'ERROR'});
+			const resp=JSON.parse(this.responseText).map((el)=>{return {title: el.title, year: el.year};});
+			/////////////////////
+		    let response=undefined;
+		    if(resp.length<10)
+		    	response=resp.concat(Array(10-resp.length).fill({title:"no more", year: 'no more'}));
+		    else
+		     	response=resp;
+		    //////////////////////////the response length always equals 10
+			//console.log(response);
 		    dispatch({type: "UPDATE", response, page});
 		  }
 		};
 	request.send();
+}
+
+export function sortCol(dispatch, colName){
+	dispatch({type: 'BEGIN_REQUEST'});
+	console.log('remote work');
 }
