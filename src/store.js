@@ -6,18 +6,20 @@ const initialState={
 		{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},
 		{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'}
 	],
-	activePage: 1
+	activePage: 1,
+	selector: {choise: null}
 }
 function reducer(state=initialState,action){
 	switch(action.type){
 		// case 'GET_INFO':
 		// 	return {showname: ['I','AM','GOOD','PROGRAMMER'], activePage: state.activePage};
 		case "BEGIN_REQUEST":
-			return {showname: state.showname, activePage: state.activePage}
+			return state;
 		case 'UPDATE':
-			return {showname: action.response, activePage: action.page};
+			return {showname: action.response, activePage: action.page, selector: {...action.selector}};
 		case 'ERROR':
-			return {showname: ['error'], activePage: state.activePage};
+			alert("External error. Can't perform action");
+			return state;
 		default:
 			return state;
 	}

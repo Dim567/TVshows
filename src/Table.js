@@ -1,41 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import remoteRequest from './remote_request.js';
-import { sortCol } from './remote_request.js';
-
-// function remoteRequest(dispatch,startPage){
-// 	dispatch({type: 'BEGIN_REQUEST'});
-// 	let page=startPage;
-// 	 let request = new XMLHttpRequest();
-// 		request.open('GET', `https://api.trakt.tv/shows/popular?page=${page}`);
-// 		request.setRequestHeader('Content-Type', 'application/json');
-// 		request.setRequestHeader('trakt-api-version', '2');
-// 		request.setRequestHeader('trakt-api-key', '094e531346ad44623adad1d303859ba4bd981a6ea4f60912a38a9d27dca7818d');
-
-// 		request.onreadystatechange = function () {
-// 		  if (this.readyState === 4) {
-// 		  	if(this.status!==200)
-// 		  		dispatch({type: 'ERROR'});
-// 		    //console.log('Show name:', JSON.parse(this.responseText));
-// 		   const response=JSON.parse(this.responseText).map((el)=>el.title);
-// 		   // console.log(response);
-// 		    dispatch({type: "UPDATE", response});
-// 		  }
-// 		};
-// 	request.send();
-// }
 
 function mapStateToProps(state, ownProps){
-  return {...state};
+  return state;
 }
- function mapDispatchToProps(){
- return function(dispatch){
+ function mapDispatchToProps(dispatch){
+//return function(){
  	return{
 	 	getInfoFromStore: ()=>dispatch({type: "GET_INFO"}),
 	 	getStartPage: (pageNum)=>remoteRequest(dispatch,pageNum),
-	 	getSortedList: (colName)=>sortCol(dispatch,colName)//////example of async action creator
+	 	getFoundList: (page,selector)=>remoteRequest(dispatch,page,selector)//////example of async action creator
 	}
- }
+ //}
 }
 
 function TableRow(props){
@@ -80,8 +57,8 @@ function TableHead(props){
 	        <tr>
 	          <th>Number</th>
 	          <th>Poster</th>
-	          <th onClick={()=>props.sortList('showname')}>Show Name</th>
-	          <th onClick={()=>props.sortList('year')}>year</th>
+	          <th onClick={()=>props.searchList(undefined,{choise: 'showname', showname:'batman'})}>Show Name</th>
+	          <th onClick={()=>props.searchList(undefined,{choise: 'year', year: 2016})}>year</th>
 	          <th>somth</th>
 	          <th>somth</th>
 	          <th>somth</th>
@@ -99,7 +76,7 @@ class Table extends React.Component{
 	render(){
 		return(
 			<table onClick={()=>{this.props.getInfoFromStore(); console.log(this.props.activePage);}}>
-	          <TableHead sortList={this.props.getSortedList}/>
+	          <TableHead searchList={this.props.getFoundList} page={this.props.activePage} selector={this.props.selector}/>
 	          <TableBody showname={this.props.showname} page={this.props.activePage}/>
 	        </table>
 		);
