@@ -2,12 +2,9 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 const initialState={
-	showname: [
-		{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},
-		{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'},{title: 'n/a',year: 'n/a'}
-	],
+	show: Array(10).fill(1).map(()=>{return {title:'n/a',year:'n/a',genres:'n/a',homepage:'n/a',network:'n/a'};}),
 	activePage: 1,
-	selector: {choise: null}
+	selector: {showname: '', year: '', genres: ''}
 }
 function reducer(state=initialState,action){
 	switch(action.type){
@@ -16,7 +13,7 @@ function reducer(state=initialState,action){
 		case "BEGIN_REQUEST":
 			return state;
 		case 'UPDATE':
-			return {showname: action.response, activePage: action.page, selector: {...action.selector}};
+			return {show: action.response, activePage: action.page, selector: {...action.selector}};
 		case 'ERROR':
 			alert("External error. Can't perform action");
 			return state;

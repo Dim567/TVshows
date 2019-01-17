@@ -22,6 +22,7 @@ function TableRow(props){
 			{newColumns.map((el,ind)=>
 				{   
 					let cell=0;
+					//console.log(props.show);
 					switch(ind){
 						case 0:
 							cell=props.ind;
@@ -30,10 +31,20 @@ function TableRow(props){
 							cell="photo";
 						break;
 						case 2:
-							cell=props.showname.title;
+							cell=props.show.title;
 						break;
 						case 3:
-							cell=props.showname.year;
+							cell=props.show.year;
+						break;
+						case 4:
+							cell=props.show.genres;
+						break;
+						case 5:
+							//let link=<b>c</b>;
+							cell=<a href={props.show.homepage}>{props.show.homepage}</a>;
+						break;
+						case 6:
+							cell=props.show.network;
 						break;
 						default:
 							cell='...';
@@ -47,7 +58,7 @@ function TableRow(props){
 function TableBody(props){
 	return (
 		<tbody>
-			{Array(10).fill(1).map((el,ind)=><TableRow key={ind} ind={ind+1+(props.page-1)*10} showname={props.showname[ind]}/>)}
+			{Array(10).fill(1).map((el,index)=><TableRow key={index} ind={index+1+(props.page-1)*10} show={props.show[index]}/>)}
 		</tbody>
 	);
 }
@@ -57,11 +68,11 @@ function TableHead(props){
 	        <tr>
 	          <th>Number</th>
 	          <th>Poster</th>
-	          <th onClick={()=>props.searchList(undefined,{choise: 'showname', showname:'batman'})}>Show Name</th>
-	          <th onClick={()=>props.searchList(undefined,{choise: 'year', year: 2016})}>year</th>
-	          <th>somth</th>
-	          <th>somth</th>
-	          <th>somth</th>
+	          <th>Show Name</th>
+	          <th>year</th>
+	          <th>genges</th>
+	          <th>homepage</th>
+	          <th>network</th>
 	        </tr>
         </thead>
 	);
@@ -77,7 +88,7 @@ class Table extends React.Component{
 		return(
 			<table onClick={()=>{this.props.getInfoFromStore(); console.log(this.props.activePage);}}>
 	          <TableHead searchList={this.props.getFoundList} page={this.props.activePage} selector={this.props.selector}/>
-	          <TableBody showname={this.props.showname} page={this.props.activePage}/>
+	          <TableBody show={this.props.show} page={this.props.activePage}/>
 	        </table>
 		);
 	}
