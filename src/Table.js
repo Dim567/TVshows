@@ -9,8 +9,8 @@ function mapStateToProps(state, ownProps){
 //return function(){
  	return{
 	 	getInfoFromStore: ()=>dispatch({type: "GET_INFO"}),
-	 	getStartPage: (pageNum)=>remoteRequest(dispatch,pageNum),
-	 	getFoundList: (page,selector)=>remoteRequest(dispatch,page,selector)//////example of async action creator
+	 	getStartPage: (pageNum)=>dispatch(()=>remoteRequest(dispatch,pageNum)),
+	 	getFoundList: (page,selector)=>dispatch(()=>remoteRequest(dispatch,page,selector))//////example of async action creator
 	}
  //}
 }
@@ -28,8 +28,7 @@ function TableRow(props){
 							cell=props.ind;
 						break;
 						case 1:
-							cell="photo";
-						break;
+							cell='photo';
 						case 2:
 							cell=props.show.title;
 						break;
