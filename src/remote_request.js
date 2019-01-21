@@ -48,28 +48,35 @@ export default function remoteRequest(dispatch,page=1,selector={showname: '', ye
 	// 	  }
 	// 	};
 	// request.send();
-	async function retrieveData(url){
-		let dataObj=await fetch(url,settings);
-			// {
-			// 	method: 'GET',
-			// 	headers:{'Content-Type': 'application/json','trakt-api-version': '2','trakt-api-key':'094e531346ad44623adad1d303859ba4bd981a6ea4f60912a38a9d27dca7818d'}
-			// }
-		//);
-		if(!dataObj.ok){
-			 dispatch({type: 'ERROR'});
-			 return;
-			}
-		let data=await dataObj.json();
-		console.log(data);
-		let answer=data.map((el)=>{
-				return {title: el.title, year: el.year,genres:el.genres.join(', '),homepage:el.homepage,network:el.network};
-			});
-		let response=undefined;
-	    if(answer.length<10)
-	    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a'}));
-	    else
-	     	response=answer;
-	    dispatch({type: "UPDATE", response, page, selector:{...selector}});
+	async function retrieveData(url,settings){
+		try{
+			let dataObj=await fetch(url,settings);
+			if(!dataObj.ok){
+				 throw new Error();
+				}
+			let data=await dataObj.json();
+			console.log(data);
+			///////////////////////////////
+		
+			//////////////////////////////
+			let answer=data.map((el)=>{
+					// let src=await fetch('http://webservice.fanart.tv/v3/tv/121361?api_key=a921bece93615667d194099239fce861');
+					// let ref=await src.json();
+					// let finalRef=ref;console.log(finalRef);
+
+					return {title: el.title, year: el.year,genres:el.genres.join(', '),homepage:el.homepage,network:el.network,imgRef: ''};
+				});
+			let response=undefined;
+		    if(answer.length<10)
+		    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:'n/a'}));
+		    else
+		     	response=answer;
+		    dispatch({type: "UPDATE", response, page, selector:{...selector}});
+		}
+		catch(error){
+			console.log(error.message);
+			dispatch({type: 'ERROR'});
+		}
 	}
 	retrieveData(url,settings);
 }

@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 const initialState={
-	show: Array(10).fill(1).map(()=>{return {title:'n/a',year:'n/a',genres:'n/a',homepage:'n/a',network:'n/a'};}),
+	show: Array(10).fill(1).map(()=>{return {title:'n/a',year:'n/a',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:'n/a'};}),
 	activePage: 1,
 	selector: {showname: '', year: '', genres: ''}
 }

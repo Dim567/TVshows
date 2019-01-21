@@ -28,7 +28,8 @@ function TableRow(props){
 							cell=props.ind;
 						break;
 						case 1:
-							cell='photo';
+							cell=<img src={props.show.imgRef} alt="poster"/>;
+						break;
 						case 2:
 							cell=props.show.title;
 						break;
@@ -39,7 +40,6 @@ function TableRow(props){
 							cell=props.show.genres;
 						break;
 						case 5:
-							//let link=<b>c</b>;
 							cell=<a href={props.show.homepage}>{props.show.homepage}</a>;
 						break;
 						case 6:
