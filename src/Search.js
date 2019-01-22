@@ -28,6 +28,34 @@ class Search extends React.Component{
 				<input type='text' onChange={this.handleChange('showname')} />Search for name, description
 				<input type='text' onChange={this.handleChange('year')} />Search for year
 				<input type='text' onChange={this.handleChange('genres')} />Search for genres
+				<select defaultValue='' onChange={this.handleChange('genres')}>
+					<option value=''>All genres</option>
+					<option value='action'>Action</option>
+					<option value='drama'>Drama</option>
+					<option value='animation'>Animation</option>
+					<option value='mystery'>Mystery</option>
+					<option value='adventure'>Adventure</option>
+					<option value='fantasy'>Fantasy</option>
+					<option value='superhero'>Superhero</option>
+					<option value='comedy'>Comedy</option>
+					<option value='children'>Children</option>
+					<option value='science-fiction'>Science-fiction</option>
+					<option value='anime'>Anime</option>
+					<option value='crime'>Crime</option>
+					<option value='suspencse'>Suspense</option>
+					<option value='thriller'>Thriller</option>
+					<option value='music'>Music</option>
+					<option value='soap'>Soap</option>
+					<option value='documentary'>Documentary</option>
+					<option value='talk-show'>Talk-show</option>
+					<option value='reality'>Reality</option>
+					<option value='special-interest'>Special-interest</option>
+					<option value='romance'>Romance</option>
+					<option value='western'>Western</option>
+					<option value='history'>History</option>
+					<option value='war'>War</option>
+					<option value='horror'>Horror</option>
+				</select>
 			</div>
 		);
 	}

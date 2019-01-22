@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Pagination from './Pagination.js';
 import Table from './Table.js';
 import Search from './Search';
+import Loader from './loader';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <Search />
         <Table />
         <Pagination />
+        <Loader />
       </div>
     );
   }

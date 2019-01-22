@@ -48,35 +48,65 @@ export default function remoteRequest(dispatch,page=1,selector={showname: '', ye
 	// 	  }
 	// 	};
 	// request.send();
-	async function retrieveData(url,settings){
+	async function serialRetrieve(){
 		try{
-			let dataObj=await fetch(url,settings);
-			if(!dataObj.ok){
-				 throw new Error();
-				}
-			let data=await dataObj.json();
-			console.log(data);
-			///////////////////////////////
-		
-			//////////////////////////////
-			let answer=data.map((el)=>{
-					// let src=await fetch('http://webservice.fanart.tv/v3/tv/121361?api_key=a921bece93615667d194099239fce861');
-					// let ref=await src.json();
-					// let finalRef=ref;console.log(finalRef);
-
-					return {title: el.title, year: el.year,genres:el.genres.join(', '),homepage:el.homepage,network:el.network,imgRef: ''};
-				});
-			let response=undefined;
-		    if(answer.length<10)
-		    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:'n/a'}));
-		    else
-		     	response=answer;
-		    dispatch({type: "UPDATE", response, page, selector:{...selector}});
+			var textCells=await retrieveData(url,settings);///////////////////text data for table
 		}
-		catch(error){
-			console.log(error.message);
+		catch(e){
+			console.log(e.message);
 			dispatch({type: 'ERROR'});
 		}
+		try{
+			var img=await Promise.all(textCells.map((el)=>retrieveData(`http://webservice.fanart.tv/v3/tv/${el.ids.tvdb}?api_key=a921bece93615667d194099239fce861`)));///////img src for table
+		}
+		catch(e){
+			console.log(e.message);
+		}
+		let answer=[];
+		for(var i=0;i<textCells.length;i++){
+			let ref="";
+			if(img[i]&&img[i].tvposter&&img[i].tvposter[0]){
+				ref=img[i].tvposter[0].url;
+			}
+			answer.push({title: textCells[i].title, year: textCells[i].year,genres:textCells[i].genres.join(', '),homepage:textCells[i].homepage,network:textCells[i].network,imgRef: ref});
+		}
+		let response=undefined;
+		if(answer.length<10)
+	    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:'n/a'}));
+	    else
+	     	response=answer;
+	    dispatch({type: "UPDATE", response, page, selector:{...selector}});
 	}
-	retrieveData(url,settings);
+	async function retrieveData(url,settings){
+		let retData;
+		//try{
+			let dataObj=await fetch(url,settings);
+			// if(!dataObj.ok){
+			// 	 throw new Error();
+			// 	}
+			let data=await dataObj.json();
+			//console.log(data);
+			retData=data;
+		//}
+		//catch(e){
+			//console.log(e.message);
+			//dispatch({type: 'ERROR'});
+		//}
+		return retData;
+	}
+	serialRetrieve().catch((er)=>alert(er.message+'. External error'));
+			///////////////////////////////
+	// retrieveData(url,settings).then((data)=>{
+	// 		//////////////////////////////
+	// 		let answer=data.map((el)=>{
+	// 				return {title: el.title, year: el.year,genres:el.genres.join(', '),homepage:el.homepage,network:el.network,imgRef: el.ids.tvdb};
+	// 			});
+	// 		// let response=undefined;
+	// 	 //    if(answer.length<10)
+	// 	 //    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:'n/a'}));
+	// 	 //    else
+	// 	 //     	response=answer;
+	// 	    //dispatch({type: "UPDATE", response, page, selector:{...selector}});
+	// 	    return answer;
+	// 	}).then((response)=>dispatch({type: "UPDATE", response, page, selector:{...selector}}));
 }

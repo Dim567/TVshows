@@ -1,7 +1,6 @@
 table {
   margin: auto;
   width: 95vw;
-  height: 50vh;
   border: 2px solid #008000;
   border-collapse: collapse;
   color: #008000;
@@ -10,6 +9,10 @@ table {
 table td,
 table th {
   border: 1px solid #008000;
+}
+table td:nth-child(2) {
+  height: 10vh;
+  width: 10vh;
 }
 table th {
   color: #00008b;
@@ -39,6 +42,34 @@ h1 {
 }
 .pagContainer .activePagination {
   background: #f00;
+}
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.Loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ff0;
+  z-index: 1000;
+}
+.loadedLoader {
+  display: none;
+}
+.startLoader {
+  width: 5px;
+  height: 20px;
+  background: #f00;
+}
+.endLoader {
+  width: 500px;
+  height: 20px;
+  background: #f00;
+  transition: width 0.5s;
 }
 body {
   margin: 0;

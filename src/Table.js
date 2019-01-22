@@ -28,7 +28,7 @@ function TableRow(props){
 							cell=props.ind;
 						break;
 						case 1:
-							cell=<img src={props.show.imgRef} alt="poster"/>;
+							cell=<img src={props.show.imgRef} alt="no poster"/>;
 						break;
 						case 2:
 							cell=props.show.title;
