@@ -37,22 +37,48 @@ img
   display: block
   width: 100%
   height: 100%
-.Loader
-  position fixed
-  top 0
-  left 0
+.Invisible
+  display: none
+.loader
+  position: fixed
+  top: 0
+  left: 0
   width: 100vw
   height: 100vh
-  background: rgb(yellow);
-  z-index: 1000
-.loadedLoader
-  display: none
-.startLoader
-  width: 5px
-  height: 20px
-  background: red
-.endLoader
-  width: 500px
-  height: 20px
-  background: red
-  transition: width 0.5s
+  display: flex
+  justify-content: space-around
+  align-items: center
+  font-size: 7vh
+  font-weight: bold
+  color: green
+  background: black
+  .loading1
+    width: 5vh
+    height: 5vh
+    background: green
+    border-radius: 100%
+    animation: dots 1s infinite 
+    animation-timing-function: linear
+  .loading2
+    width: 5vh
+    height: 5vh
+    background: green
+    border-radius: 100%
+    animation: dots 1s infinite 
+    animation-delay 0.2s
+    animation-timing-function: linear
+  .loading3 
+    width: 5vh
+    height: 5vh
+    background: green
+    border-radius: 100%
+    animation: dots 1s infinite 
+    animation-delay 0.4s
+    animation-timing-function: linear
+@keyframes dots
+  0% 
+    transform scale(1)
+  50% 
+    transform scale(0)
+  100% 
+    transform scale(1)

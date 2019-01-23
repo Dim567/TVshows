@@ -28,7 +28,10 @@ function TableRow(props){
 							cell=props.ind;
 						break;
 						case 1:
-							cell=<img src={props.show.imgRef} alt="no poster"/>;
+							if(props.show.imgRef)
+								cell=<img src={props.show.imgRef} alt="poster"/>;
+							else
+								cell='no poster';
 						break;
 						case 2:
 							cell=props.show.title;
@@ -57,7 +60,9 @@ function TableRow(props){
 function TableBody(props){
 	return (
 		<tbody>
-			{Array(10).fill(1).map((el,index)=><TableRow key={index} ind={index+1+(props.page-1)*10} show={props.show[index]}/>)}
+			{
+				Array(props.show.length).fill(1).map((el,index)=><TableRow key={index} ind={index+1+(props.page-1)*10} show={props.show[index]}/>)
+			}
 		</tbody>
 	);
 }
@@ -79,9 +84,6 @@ function TableHead(props){
 class Table extends React.Component{
 	componentDidMount(){
 		this.props.getStartPage(1);		
-	}
-	componentDidUpdate(){
-		//this.props.getUpdate();
 	}
 	render(){
 		return(

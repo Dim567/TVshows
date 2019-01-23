@@ -27,7 +27,6 @@ class Search extends React.Component{
 			<div>
 				<input type='text' onChange={this.handleChange('showname')} />Search for name, description
 				<input type='text' onChange={this.handleChange('year')} />Search for year
-				<input type='text' onChange={this.handleChange('genres')} />Search for genres
 				<select defaultValue='' onChange={this.handleChange('genres')}>
 					<option value=''>All genres</option>
 					<option value='action'>Action</option>
@@ -42,7 +41,7 @@ class Search extends React.Component{
 					<option value='science-fiction'>Science-fiction</option>
 					<option value='anime'>Anime</option>
 					<option value='crime'>Crime</option>
-					<option value='suspencse'>Suspense</option>
+					<option value='suspense'>Suspense</option>
 					<option value='thriller'>Thriller</option>
 					<option value='music'>Music</option>
 					<option value='soap'>Soap</option>
@@ -55,7 +54,7 @@ class Search extends React.Component{
 					<option value='history'>History</option>
 					<option value='war'>War</option>
 					<option value='horror'>Horror</option>
-				</select>
+				</select>Search for genres
 			</div>
 		);
 	}

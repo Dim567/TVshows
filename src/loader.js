@@ -6,23 +6,22 @@ function mapStateToProps(state){
 }
 
 class Loader extends React.Component{
-	constructor(props){
-		super(props);
-		this.loader='startLoader';
-		//this.loaderContainer='loadedLoader';
-	}
 	render(){
+		let loadClass='Invisible';
 		if(this.props.isLoading){
-			//this.loaderContainer='Loader';
-			this.loader='endLoader';
+			loadClass='loader';
 		}
 		else {
-			//this.loaderContainer='loadedLoader';
-			this.loader='startLoader';
+			loadClass='Invisible';
 		}
 		return (
 			<div className=''>
-				<div className={this.loader}></div>
+				<div className={loadClass}>
+					Loading
+					<div className="loading1"></div>
+					<div className="loading2"></div>
+					<div className="loading3"></div>
+				</div>
 			</div>
 		);
 	}

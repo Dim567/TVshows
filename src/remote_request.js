@@ -50,7 +50,10 @@ export default function remoteRequest(dispatch,page=1,selector={showname: '', ye
 	// request.send();
 	async function serialRetrieve(){
 		try{
-			var textCells=await retrieveData(url,settings);///////////////////text data for table
+			var data=await fetch(url,settings);
+			var textCells=await data.json();///////////////////text data for table
+			var maxPage=+data.headers.get('X-Pagination-Page-Count');
+			//console.log(maxPage);
 		}
 		catch(e){
 			console.log(e.message);
@@ -70,17 +73,17 @@ export default function remoteRequest(dispatch,page=1,selector={showname: '', ye
 			}
 			answer.push({title: textCells[i].title, year: textCells[i].year,genres:textCells[i].genres.join(', '),homepage:textCells[i].homepage,network:textCells[i].network,imgRef: ref});
 		}
-		let response=undefined;
-		if(answer.length<10)
-	    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:'n/a'}));
-	    else
-	     	response=answer;
-	    dispatch({type: "UPDATE", response, page, selector:{...selector}});
+		let response=answer;
+		// if(answer.length<10)
+	 //    	response=answer.concat(Array(10-answer.length).fill({title:"no more", year: 'no more',genres:'n/a',homepage:'n/a',network:'n/a',imgRef:''}));
+	 //    else
+	 //     	response=answer;
+	    dispatch({type: "UPDATE", response, page, maxPage, selector:{...selector}});
 	}
-	async function retrieveData(url,settings){
+	async function retrieveData(url){
 		let retData;
 		//try{
-			let dataObj=await fetch(url,settings);
+			let dataObj=await fetch(url);
 			// if(!dataObj.ok){
 			// 	 throw new Error();
 			// 	}

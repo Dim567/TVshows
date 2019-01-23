@@ -3,21 +3,29 @@ import { connect } from 'react-redux';
 import remoteRequest from './remote_request.js';
 
 function mapStateToProps(state){
-	return {activePage: state.activePage,selector: state.selector};
+	return {activePage: state.activePage,maxPage: state.maxPage,selector: state.selector};
 }
 
 class Pagination extends Component{
-	handleClick(type,aPage,selector,ind=1){
-		const page=aPage-10>=1?aPage-10:1;
+	handleClick(type,aPage,maxPage,selector,ind=1){
+		let page=ind+aPage-(aPage-1)%10;
+		let backPage=aPage-10>=1?aPage-10:1;
+		let forwPage=aPage+10>maxPage?maxPage:aPage+10;
 		switch(type){
 			case 'back':
-				this.props.dispatch((dispatch)=>remoteRequest(dispatch,page,selector));
+				if(backPage===aPage)
+					break;
+				this.props.dispatch((dispatch)=>remoteRequest(dispatch,backPage,selector));
 				break;
 			case 'pages':
-				this.props.dispatch((dispatch)=>remoteRequest(dispatch,ind+aPage-(aPage-1)%10,selector));
+				if(page===aPage)
+					break;
+				this.props.dispatch((dispatch)=>remoteRequest(dispatch,page,selector));
 				break;
 			case 'forward':
-				this.props.dispatch((dispatch)=>remoteRequest(dispatch,aPage+10,selector));
+				if(forwPage===aPage)
+					break;
+				this.props.dispatch((dispatch)=>remoteRequest(dispatch,forwPage,selector));
 				break;
 			default:
 				break;
@@ -26,18 +34,29 @@ class Pagination extends Component{
 	render() {
 		let aPage=this.props.activePage;
 		let selector=this.props.selector;
+		let maxPage=this.props.maxPage;
+		//console.log(maxPage);
+		let amount=0;
+		let rest=maxPage%10;
+		if(rest>0&&(maxPage-aPage)<rest){
+			amount=rest;
+		}
+		else{
+			if(maxPage>0)
+				amount=10;
+		}
 		//console.log(aPage,selector);
 		return (
 			<div className="pagContainer">
-				<div className='Pagination' onClick={()=>this.handleClick('back',aPage,selector)}>{'<<'}</div>
-				{Array(10).fill(1).map((el,ind)=>
+				<div className='Pagination' onClick={()=>this.handleClick('back',aPage,maxPage,selector)}>{'<<'}</div>
+				{Array(amount).fill(1).map((el,ind)=>
 					<div className={aPage===(ind+1+(aPage-1)-(aPage-1)%10)?'activePagination':'Pagination'} key={'key'+ind} onClick={
-						()=>this.handleClick('pages',aPage,selector,ind)
+						()=>this.handleClick('pages',aPage,maxPage,selector,ind)
 					}>
 						{ind+1+(aPage-1)-(aPage-1)%10}
 					</div>
 				)}
-				<div className='Pagination' onClick={()=>this.handleClick("forward",aPage,selector)}>{'>>'}</div>
+				<div className='Pagination' onClick={()=>this.handleClick("forward",aPage,maxPage,selector)}>{'>>'}</div>
 			</div>
 		);
 	}
