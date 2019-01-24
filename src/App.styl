@@ -3,36 +3,63 @@ table
   width: 95vw
   border: 2px solid green
   border-collapse: collapse
-  color: green
+  color: white
   margin-bottom: 2vh
   td, th
-    border: 1px solid green
+    text-align: center
+    border: 1px solid black
+    background: grey
+  td:nth-child(1)
+    width: 3em
   td:nth-child(2)
-    height: 10vh
-    width: 10vh
+    height: 15vmin
+    width: 15vmin
+  td:nth-child(3)
+    font-size: 1.5em
   th
     &:hover
       cursor: pointer
+    height: 5vh
     color: darkblue
-    background: grey
-h1
+    background: rgb(200,200,200)
+.Header
   text-align: center
   color: red
   font-size: 10vh
+.SearchForm
+  display: flex
+  justify-content: space-around
+  align-items: center
+  width: 95vw
+  height: 10vh
+  margin: auto
+  color: white
+  font-weight: bold
+  background: rgb(50,50,50)
+  //border: 1px solid red
+label
+  padding-right: 1rem
 .pagContainer
   display: flex
   justify-content: space-around
   .Pagination
   .activePagination
+    display: flex
+    justify-content: center
+    align-items: center
     cursor: pointer
-    width: 5vw
-    height: 5vw
-    color: black
-    font-size: 4vw
-    border: 2px solid green
-    background: cyan
+    width: 2.5rem
+    height: 2.5rem
+    color: white
+    font-weight: bold
+    //font-size: 2rem
+    //border: 2px solid green
+    border-radius: 0.5rem
+    background: grey
   .activePagination
-    background: red
+    color: black
+    border: 2px solid grey
+    background: white
 img
   display: block
   width: 100%

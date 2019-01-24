@@ -3,28 +3,51 @@ table {
   width: 95vw;
   border: 2px solid #008000;
   border-collapse: collapse;
-  color: #008000;
+  color: #fff;
   margin-bottom: 2vh;
 }
 table td,
 table th {
-  border: 1px solid #008000;
+  text-align: center;
+  border: 1px solid #000;
+  background: #808080;
+}
+table td:nth-child(1) {
+  width: 3em;
 }
 table td:nth-child(2) {
-  height: 10vh;
-  width: 10vh;
+  height: 15vmin;
+  width: 15vmin;
+}
+table td:nth-child(3) {
+  font-size: 1.5em;
 }
 table th {
+  height: 5vh;
   color: #00008b;
-  background: #808080;
+  background: #c8c8c8;
 }
 table th:hover {
   cursor: pointer;
 }
-h1 {
+.Header {
   text-align: center;
   color: #f00;
   font-size: 10vh;
+}
+.SearchForm {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 95vw;
+  height: 10vh;
+  margin: auto;
+  color: #fff;
+  font-weight: bold;
+  background: #323232;
+}
+label {
+  padding-right: 1rem;
 }
 .pagContainer {
   display: flex;
@@ -32,16 +55,21 @@ h1 {
 }
 .pagContainer .Pagination,
 .pagContainer .activePagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
-  width: 5vw;
-  height: 5vw;
-  color: #000;
-  font-size: 4vw;
-  border: 2px solid #008000;
-  background: #0ff;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  background: #808080;
 }
 .pagContainer .activePagination {
-  background: #f00;
+  color: #000;
+  border: 2px solid #808080;
+  background: #fff;
 }
 img {
   display: block;
