@@ -6,13 +6,11 @@ function mapStateToProps(state, ownProps){
   return state;
 }
  function mapDispatchToProps(dispatch){
-//return function(){
  	return{
 	 	getInfoFromStore: ()=>dispatch({type: "GET_INFO"}),
 	 	getStartPage: (pageNum)=>dispatch(()=>remoteRequest(dispatch,pageNum)),
 	 	getFoundList: (page,selector)=>dispatch(()=>remoteRequest(dispatch,page,selector))//////example of async action creator
 	}
- //}
 }
 
 function TableRow(props){

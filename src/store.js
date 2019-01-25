@@ -10,8 +10,6 @@ const initialState={
 }
 function reducer(state=initialState,action){
 	switch(action.type){
-		// case 'GET_INFO':
-		// 	return {showname: ['I','AM','GOOD','PROGRAMMER'], activePage: state.activePage};
 		case "BEGIN_REQUEST":
 			let pendingState={
 				show: state.show.map((el)=>{return {title: el.title,year: el.year,genres: el.genres,homepage:el.homepage,network: el.network,imgRef:''};}),///maybe state.show and enough

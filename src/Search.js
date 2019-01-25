@@ -15,16 +15,10 @@ class Search extends React.Component{
 		this.handleFormChange=this.handleFormChange.bind(this);
 	}
 	handleSelectChange(event){
-		//return (event)=>{	
-			//console.log(this.props.selector);	
-			let searchValue={...this.props.selector};
-			//console.log(searchValue);
-			searchValue['genres']=event.target.value;
-			//console.log(searchValue);
-			//console.log(this.props.selector);
-			//let searchValue=Object.assign({:event.target.value},...this.props.selector);
-			this.props.dispatch((dispatch)=>remoteRequest(dispatch,1,searchValue));
-		//}	   
+		let searchValue={...this.props.selector};
+		//console.log(searchValue);
+		searchValue['genres']=event.target.value;
+		this.props.dispatch((dispatch)=>remoteRequest(dispatch,1,searchValue));   
 	}
 	handleFormChange(event){
 		let searchValue={
