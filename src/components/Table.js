@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import remoteRequest from './remote_request.js';
+import remoteRequest from '../action_creator/remote_request.js';
 
 function mapStateToProps(state, ownProps){
   return state;
