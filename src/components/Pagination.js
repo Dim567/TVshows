@@ -9,8 +9,8 @@ function mapStateToProps(state){
 class Pagination extends Component{
 	handleClick(type,aPage,maxPage,selector,ind=1){
 		let page=ind+aPage-(aPage-1)%10;
-		let backPage=aPage-10>=1?aPage-10:1;
-		let forwPage=aPage+10>maxPage?maxPage:aPage+10;
+		let backPage=aPage-1>=1?aPage-1:1;
+		let forwPage=aPage+1>maxPage?maxPage:aPage+1;
 		switch(type){
 			case 'back':
 				if(backPage===aPage)
